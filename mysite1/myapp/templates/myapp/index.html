@@ -8,8 +8,10 @@
     <h2>
         {% for item in items %}
         <a href="{% url 'myapp:detail' item.id %}">
-            ID: {{ item.id }} | Имя: {{ item.name }} | Цена: {{ item.price }} | Описание: {{ item.description }} <br/>
+          ID: {{ item.id }} | Имя: {{ item.name }} | Цена: {{ item.price }} | Описание: {{ item.description }} <br/>
         </a>
+          <image src="{{ item.image.url }}"> 
+          
         {% endfor %}
 
     </h2>
