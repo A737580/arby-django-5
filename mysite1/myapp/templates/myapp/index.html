@@ -1,24 +1,7 @@
+{% extends 'myapp/base.html' %}
 {% load static %}
-<html>
-    <head>
-        <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
-    </head>
+{% block content %}
 
-    <body class="">
-    <nav>
-      <div>
-        <div>
-          <div>
-            <div>
-              <div class="flex">
-                <img class="h-8 w-8" src="{% static 'myapp/images/img.png' %}" alt="logo">
-                <span class="text-amber-300 text-6xl">Logo shop</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </nav>
 
 
     <h1>This is index template </h1>
@@ -30,5 +13,4 @@
         {% endfor %}
 
     </h2>
-    </body>
-</html>
+{% endblock content %}

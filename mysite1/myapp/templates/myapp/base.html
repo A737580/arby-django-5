@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+
+
+  <head>
+    <link rel="stylesheet" href="{% static 'myapp/styles.css' %}">
+  </head>
+
+  <body>
+    {% include 'myapp/navbar.html' %}  
+  
+    {% block content %}
+      
+    {% endblock content %}
+  
+  </body>
+</html>
