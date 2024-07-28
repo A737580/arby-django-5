@@ -5,16 +5,26 @@
     <div class="flex justify-betweens">
       <div class="flex space-x-7">
         <div >
-          <a href="#" class="flex items-center px-2 py-4">
+          <a href="{% url 'myapp:index' %}" class="flex items-center px-2 py-4">
           <img class="h-8 w-8" src="{% static 'myapp/images/img.png' %}" alt="logo">
           <span class="text-gray-500 font-semibold text-xl">Logo shop</span> 
           </a>
         </div>
         <div class="items-center flex space-x-1">
-          <a href="#" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-green-500">Home</a>
+          <a href="{% url 'myapp:index' %}" class="py-4 px-2 text-gray-500 font-semibold border-b-4 border-green-500">Home</a>
           <a href="#" class="py-4 px-2 text-gray-500 font-semibold">About</a>
           <a href="#" class="py-4 px-2 text-gray-500 font-semibold">Contacts</a>
-          
+          {% if user.is_authenticated %}
+            <form class="logout" action="{% url 'users:logout' %}" method="post">
+              {% csrf_token %}
+                <button class="py-4 px-2 text-gray-500 font-semibold" type="submit">User logout</button>
+            </form>
+            
+          	<a class="py-4 px-2 text-gray-500 font-semibold" href="{% url 'users:profile' %}">Profile</a>
+          {% else %}
+            <a class="py-4 px-2 text-gray-500 font-semibold" href="{% url 'users:login' %}">Login</a>
+
+          {% endif %}
         </div>
       </div>
     </div>

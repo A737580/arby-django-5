@@ -53,3 +53,4 @@ def delete_item(request, my_id):
         item.delete()
         return redirect('/myapp/')
     return render(request, "myapp/deleteItem.html",context)
+
