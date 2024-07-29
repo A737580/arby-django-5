@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Product
-from django.views.generic import ListView
+from django.views.generic import ListView, DetailView
 
 
 
@@ -13,7 +13,10 @@ def index(request):
         'items': items
        }
     return render(request, "myapp/index.html", context)
-
+class ProductListView(ListView):
+    model=Product
+    template_name = "myapp/index.html"
+    context_object_name = 'items'
 
 
 def indexItem(request, my_id):
@@ -22,6 +25,11 @@ def indexItem(request, my_id):
         'item':item
     }
     return render(request, "myapp/detail.html", context=context)
+
+class ProductDetailView(DetailView):
+    model = Product
+    template_name = "myapp/detail.html"
+    context_object_name = 'item'
 @login_required
 def add_item(request):
     if request.method == "POST":
