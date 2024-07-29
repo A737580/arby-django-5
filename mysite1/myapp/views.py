@@ -3,28 +3,29 @@ from django.http import HttpResponse
 from django.contrib.auth.decorators import login_required
 from .models import Product
 from django.views.generic import ListView, DetailView
+from django.views.generic.edit import DeleteView
+from django.urls import reverse_lazy
 
 
 
-# Create your views here.
-def index(request):
-    items = Product.objects.all()
-    context = {
-        'items': items
-       }
-    return render(request, "myapp/index.html", context)
+# def index(request):
+#     items = Product.objects.all()
+#     context = {
+#         'items': items
+#        }
+#     return render(request, "myapp/index.html", context)
 class ProductListView(ListView):
     model=Product
     template_name = "myapp/index.html"
     context_object_name = 'items'
 
 
-def indexItem(request, my_id):
-    item = Product.objects.get(id=my_id)
-    context = {
-        'item':item
-    }
-    return render(request, "myapp/detail.html", context=context)
+# def indexItem(request, my_id):
+#     item = Product.objects.get(id=my_id)
+#     context = {
+#         'item':item
+#     }
+#     return render(request, "myapp/detail.html", context=context)
 
 class ProductDetailView(DetailView):
     model = Product
@@ -67,4 +68,8 @@ def delete_item(request, my_id):
         item.delete()
         return redirect('/myapp/')
     return render(request, "myapp/deleteItem.html",context)
+
+class ProductDeleteView(DeleteView):
+    model = Product
+    success_url = reverse_lazy('myapp:index')
 
