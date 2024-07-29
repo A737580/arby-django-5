@@ -3,6 +3,7 @@ from  django.contrib.auth import login, logout
 from .forms import NewUserForm
 from .models import Profile
 from django.contrib.auth.decorators import login_required
+from django.contrib.auth.models import User
 
 def logout_view(request):
     if request.method == "POST":
@@ -30,5 +31,10 @@ def profile(request):
         profile = Profile(user=user, contact_number=contact_number, image=image)
         profile.save()
     return render(request,'users/profile.htm')
+def seller_profile(request,id):
+    seller = User.objects.get(id=id)
+    context = {'seller':seller}
+    return render(request,'users/sellerprofile.html', context)
+
 
 
