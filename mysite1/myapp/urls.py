@@ -6,6 +6,8 @@ from myapp.views import (
     index,
     # ProductListView,
     ProductDeleteView,
+    PaymentSuccessView,
+    PaymentFailedView,
     ProductDetailView)
 
 app_name = 'myapp'
@@ -25,5 +27,8 @@ urlpatterns = [
 
     # path('deleteitem/<int:my_id>/', delete_item, name='delete_item'),
     path('deleteitem/<int:pk>/', ProductDeleteView.as_view(), name='delete_item'),
+    path('success/', PaymentSuccessView.as_view(), name='success'),
+    path('failed/', PaymentFailedView.as_view(), name='failed'),
+    path('api/checkout-session/<int:id>', update_item, name='api_checkout_session'),
 
 ]
