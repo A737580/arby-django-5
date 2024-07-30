@@ -5,19 +5,25 @@ from .models import Product
 from django.views.generic import ListView, DetailView
 from django.views.generic.edit import DeleteView
 from django.urls import reverse_lazy
+from django.core.paginator import Paginator
 
 
 
-# def index(request):
-#     items = Product.objects.all()
-#     context = {
-#         'items': items
-#        }
-#     return render(request, "myapp/index.html", context)
-class ProductListView(ListView):
-    model=Product
-    template_name = "myapp/index.html"
-    context_object_name = 'items'
+def index(request):
+    items = Product.objects.all()
+    paginator = Paginator(items, 2)
+    page_number = request.GET.get('page')
+    page_obj = paginator.get_page(page_number)
+    context = {
+        # 'items': items,
+        'page_obj': page_obj
+       }
+    return render(request, "myapp/index.html", context)
+# class ProductListView(ListView):
+#     model=Product
+#     template_name = "myapp/index.html"
+#     context_object_name = 'items'
+#     paginate_by = 2
 
 
 # def indexItem(request, my_id):
